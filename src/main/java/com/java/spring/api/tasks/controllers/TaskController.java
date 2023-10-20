@@ -1,24 +1,31 @@
 package com.java.spring.api.tasks.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.spring.api.tasks.models.Task;
 import com.java.spring.api.tasks.repositorys.TaskRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
-@RequestMapping(value = "/tasks")
+@RequestMapping(value = "/api/tasks")
 public class TaskController {
     
     private TaskRepository repository;
 
     TaskController(TaskRepository repository) {
         this.repository = repository;
+    }
+
+    @PostMapping(value = "/save")
+    public Task save(@Valid Task task) {
+        return repository.save(task);
     }
 
     @GetMapping(value = "/list")
