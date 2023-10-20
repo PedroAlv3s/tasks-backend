@@ -11,4 +11,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     public List<Task> findAll();
     public Optional<Task> findById(Long id);
+    public <TaskTemp extends Task> TaskTemp save(TaskTemp task);
+    public void delete(Task task);
+    public void deleteById(Long id);
 }
